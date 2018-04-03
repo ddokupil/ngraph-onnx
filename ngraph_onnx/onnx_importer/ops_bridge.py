@@ -406,7 +406,8 @@ def Pad(onnx_node, ng_inputs):  # type: (NodeWrapper, List[NgraphNode]) -> Ngrap
 
     # Split paddings into pairs for each axis
     pading_below, pading_above = split_pads_into_pairs(pads)
-    return ng.pad(ng_inputs[0], ng.constant(value, dtype=np.float32), pading_below, pading_above)
+    return ng.pad(ng_inputs[0], ng.constant(value,
+                  dtype=get_dtype(ng_inputs[0].get_element_type())), pading_below, pading_above)
 
 
 # Pooling
